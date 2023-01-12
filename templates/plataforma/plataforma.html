@@ -1,1 +1,64 @@
-<h1>PLAFORMA</h1>
+{% extends "plataforma/baseplataforma.html" %}
+{% block 'title' %}Plataforma{% endblock %}
+
+{% block 'body' %}
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+    "symbols": [
+      {
+        "proName": "FOREXCOM:SPXUSD",
+        "title": "S&P 500"
+      },
+      {
+        "proName": "FOREXCOM:NSXUSD",
+        "title": "US 100"
+      },
+      {
+        "proName": "FX_IDC:EURUSD",
+        "title": "EUR/USD"
+      },
+      {
+        "proName": "BITSTAMP:BTCUSD",
+        "title": "Bitcoin"
+      },
+      {
+        "proName": "BITSTAMP:ETHUSD",
+        "title": "Ethereum"
+      },
+      {
+        "description": "Cardano",
+        "proName": "CRYPTOCAP:ADA"
+      }
+    ],
+    "showSymbolLogo": true,
+    "colorTheme": "light",
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "locale": "en"
+  }
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <div class="tradingview-widget-copyright"><a href="https://br.tradingview.com/markets/cryptocurrencies/prices-all/" rel="noopener" target="_blank"><span class="blue-text">Mercados de Cripto</span></a> por TradingView</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+    {
+    "width": "100%",
+    "height": "1000",
+    "defaultColumn": "overview",
+    "screener_type": "crypto_mkt",
+    "displayCurrency": "USD",
+    "colorTheme": "light",
+    "locale": "br",
+    "isTransparent": true
+
+  }
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+    {% endblock %}
