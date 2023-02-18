@@ -130,8 +130,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
+LOGIN_REDIRECT_URL='/'
+ACCOUNT_EMAIL_VERIFICATION= True
+ACCOUNT_EMAIL_REQUIRED=True
 # Email
 
 DEFAULT_FROM_EMAIL = "naorespondacryptofinance@outlook.com"
