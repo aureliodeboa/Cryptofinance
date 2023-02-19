@@ -7,11 +7,13 @@
 }
 
 body {
+    
 	font-family: Verdana;
 }
 nav {
+    
 	background: #1B1A17;
-	height: 80px;
+	height: 100px;
 	width: 100%;
 }
 label.logo {
