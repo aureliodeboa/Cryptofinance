@@ -40,9 +40,10 @@
     
 		<ul>
       {%if request.user.is_authenticated %} 
-			<li><a class="active" href="{% url 'plataforma' %}">Início</a></li>
+			<li><a class="active" href="{% url 'plataforma' %}">Plataforma</a></li>
 			 
-			<li><a href="#">Usuario</a></li>
+			<li><a href="#">Favoritos</a></li>
+      <li><a href="#">Carteira</a></li>
 			<li><a href="{% url 'account_logout' %}">Sair</a></li>
       {%else%}
 
