@@ -1,4 +1,6 @@
+
 {% extends 'plataforma/base.html' %}
+{% load humanize %}
 {%block title%} Sua Carteira {%endblock%}
 {% block carteira%}active{% endblock %}"
 {%block content%} 
@@ -26,7 +28,7 @@
             </tr>
             {% endfor %}
             
-            <h5>Seu patrimonio atual {{ user.get_username }}  é de : {{saldo}}</h5>
+            <h5>Seu patrimonio atual {{ user.get_username }}  é de : {%if saldo > 9999 %}{{saldo|intword}}{%else%}{{saldo|intcomma}}{%endif%}  </h5>
             {% else %}
             <p>Nothing Here to show</p>
             {% endif %}
