@@ -1,5 +1,6 @@
 {% extends 'plataforma/base.html' %}
 {%block title%} Sua Carteira {%endblock%}
+{% block carteira%}active{% endblock %}"
 {%block content%} 
 
 <div style="margin-top:0px; pading-top:0px;"> 
@@ -7,7 +8,7 @@
         <thead>
             <tr>
                 
-               
+                <th scope="col">Simbolo</th>
                 <th scope="col">Nome</th>                
                 <th scope="col">Preco atual</th>
                 
@@ -15,15 +16,17 @@
         </thead>
         <tbody>
             {% if dataList %}
-            {% for name, price in dataList %}
+            {% for name, price,imagem in dataList %}
             <tr>
-                
+              <td><img src="{{imagem}}" height="20px" alt="Coin Logo"></td>
                 <td class="align-middle">{{name}}</td>
                 <td class="align-middle">{{price}}BRL</td>                   
             
                
             </tr>
             {% endfor %}
+            
+            <h5>Seu patrimonio atual {{ user.get_username }}  é de : {{saldo}}</h5>
             {% else %}
             <p>Nothing Here to show</p>
             {% endif %}
@@ -36,6 +39,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Adicionar Moeda +
         </button>
+        
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

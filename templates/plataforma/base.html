@@ -40,10 +40,10 @@
     
 		<ul>
       {%if request.user.is_authenticated %} 
-			<li><a class="active" href="{% url 'plataforma' %}">Plataforma</a></li>
+			<li><a class="{% block plataforma%}{% endblock %}" href="{% url 'plataforma' %}">Plataforma</a></li>
 			 
-			<li><a href="#">Favoritos</a></li>
-      <li><a href="#">Carteira</a></li>
+			<li><a class="{% block favoritos%}{% endblock %}" href="#">Favoritos</a></li>
+      <li><a class="{% block carteira%}{% endblock %}" href="{% url 'carteira' %}">Carteira</a></li>
 			<li><a href="{% url 'account_logout' %}">Sair</a></li>
       {%else%}
 
