@@ -1,0 +1,99 @@
+{% load static %}
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static '/css/style.css' %}">
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    <nav >
+		<input type="checkbox" id="check">
+		<label for="check" class="checkbtn">
+			<i class="fas fa-bars"></i>
+    
+		</label>
+    
+    
+		<label class="logo"> Crypto Finance</label>
+    
+		<ul>
+      {%if request.user.is_authenticated %} 
+			<li><a class="{% block plataforma%}{% endblock %}" href="{% url 'plataforma' %}">Plataforma</a></li>
+			 
+			<li><a class="{% block favoritos%}{% endblock %}" href="#">Favoritos</a></li>
+      <li><a class="{% block carteira%}{% endblock %}" href="{% url 'carteira' %}">Carteira</a></li>
+			<li><a href="{% url 'account_logout' %}">Sair</a></li>
+      {%else%}
+
+      <li><a href="{% url 'account_signup' %}">Cadastro</a></li>
+      <li><a href="{% url 'account_login' %}">Entrar</a></li>
+			
+      {%endif%}
+		</ul>
+	</nav>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="margin:0px">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+    "symbols": [
+      {
+        "proName": "FOREXCOM:SPXUSD",
+        "title": "S&P 500"
+      },
+      {
+        "proName": "FOREXCOM:NSXUSD",
+        "title": "US 100"
+      },
+      {
+        "proName": "FX_IDC:EURUSD",
+        "title": "EUR/USD"
+      },
+      {
+        "proName": "BITSTAMP:BTCUSD",
+        "title": "Bitcoin"
+      },
+      {
+        "proName": "BITSTAMP:ETHUSD",
+        "title": "Ethereum"
+      },
+      {
+        "description": "Cardano",
+        "proName": "CRYPTOCAP:ADA"
+      }
+    ],
+    "showSymbolLogo": true,
+    "colorTheme": "light",
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "locale": "pt"
+  }
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+    {% block content %}{% endblock %}
+</body>
+
+</html>

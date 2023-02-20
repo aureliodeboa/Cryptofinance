@@ -1,5 +1,3 @@
-
-
 from pathlib import Path
 import os
 from decouple import config
@@ -30,11 +28,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    'django.contrib.humanize',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    #apps do sistema
+    'plataforma',
+    'portifolio',
     #provadiers
     'allauth.socialaccount.providers.google',
 ]
@@ -132,8 +132,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
+LOGIN_REDIRECT_URL='plataforma'
+ACCOUNT_EMAIL_VERIFICATION= True
+ACCOUNT_EMAIL_REQUIRED=True
 # Email
 
 DEFAULT_FROM_EMAIL = "naorespondacryptofinance@outlook.com"
@@ -144,4 +145,3 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST = config('EMAIL_HOST')
-
