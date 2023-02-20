@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     #apps do sistema
     'plataforma',
+    'portifolio',
     #provadiers
     'allauth.socialaccount.providers.google',
 ]
