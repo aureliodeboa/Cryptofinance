@@ -25,53 +25,25 @@
          }
     </style>
         <title>{% block head_title %}{% endblock %}</title>
-    <style>
-      
-      body{
-        background-color: #141414;
-        border-radius: 1em;
-        padding: 1em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%) 
-        
-         }
-        
-         .container{
-          border-radius: 15%;
-          background-color: #eee;
-          padding: 20%;
-          width: 70%;
-         }
-    </style>
-        <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
   </head>
   <body>
     <div class="container">
     
-    <div class="container">
-    
     {% block body %}
 
     {% if messages %}
     
-    
       <strong>Messages:</strong>
       <ul>
-        {% for message in messages %} 
         {% for message in messages %} 
         <li>{{message}}</li>
         {% endfor %}
       </ul>
    
-   
     {% endif %}
 
-   
    
     {% block content %}
     {% endblock %}
@@ -88,19 +60,7 @@
         <a href="{% url 'account_signup' %}">Cadastra-se</a>
         {% endif %}
     </div>
-    <div class="logincadastra_se">
-        <br>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Trocar E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sair</a></li>
-        {% else %}
-        <a href="{% url 'account_login' %}">Faça Login</a>  
-        <a href="{% url 'account_signup' %}">Cadastra-se</a>
-        {% endif %}
-    </div>
   </body>
-</div>
-
 </div>
 
 </html>
