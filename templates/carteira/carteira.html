@@ -13,17 +13,19 @@
                 <th scope="col">Simbolo</th>
                 <th scope="col">Nome</th>                
                 <th scope="col">Preco atual</th>
-                
+                <th scope="col">--</th>
             </tr>
         </thead>
         <tbody>
             {% if dataList %}
-            {% for name, price,imagem in dataList %}
+            {% for name, price,imagem, id in dataList %}
             <tr>
               <td><img src="{{imagem}}" height="20px" alt="Coin Logo"></td>
                 <td class="align-middle">{{name}}</td>
                 <td class="align-middle">{{price}}BRL</td>                   
-            
+                <td class="align-middle">
+                  <a href="carteira/apagar/{{id}}"><span><i style="color:red;">X</i></span></a>
+                </td>
                
             </tr>
             {% endfor %}

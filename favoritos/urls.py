@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
 
     path('',views.favoritos,name="favoritos"),
-   
+    path('/apagar/<int:id>',views.apagar,name="apagar"),
 ]

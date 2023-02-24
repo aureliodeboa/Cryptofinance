@@ -1,7 +1,7 @@
 
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from portifolio.models import Carteira
 from django.contrib.auth.decorators import login_required
 
@@ -23,6 +23,7 @@ def carteira(request):
         nome_moeda_list=[]
         preco_moeda_list=[]
         imagem_list=[]
+        id_list=[]
         saldototal=float(0)
         for obj in carteira_objs:
             coin_api= f'https://api.coingecko.com/api/v3/coins/{obj.moeda}' #o nome que ta escrito no models
@@ -36,8 +37,9 @@ def carteira(request):
             nome_moeda_list.append(obj.moeda)
             preco_moeda_list.append(preco_total)
             saldototal+=float(preco_total)
+            id_list.append(obj.id)
 
-        final_list= zip(nome_moeda_list, preco_moeda_list,imagem_list)
+        final_list= zip(nome_moeda_list, preco_moeda_list,imagem_list,id_list)
         data={
             'dataList':final_list,
             'saldo':saldototal,
@@ -45,4 +47,13 @@ def carteira(request):
         }
 
         return render(request, 'carteira/carteira.html',context=data)
+    
+    
+@login_required
+def apagar(request,id):
+    instance=get_object_or_404(Carteira,id=id)
+    instance.delete()
+    
+    #Carteira.objects.filter(id=id).delete()
 
+    return HttpResponseRedirect(reverse('carteira'))
