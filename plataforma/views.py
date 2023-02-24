@@ -9,5 +9,6 @@ def plataforma(request):
     raw_data= requests.get(api).json()
     return render(request, 'plataforma/plataforma.html',context={'datas':raw_data})
 
-
- 
+@login_required
+def mercado(request):
+    return render(request,'plataforma/mercado.html')

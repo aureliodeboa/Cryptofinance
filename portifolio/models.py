@@ -10,4 +10,3 @@ class Carteira(models.Model):
     def __str__(self):
         return str(self.moeda)
 
-
