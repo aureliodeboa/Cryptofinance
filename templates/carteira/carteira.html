@@ -55,8 +55,8 @@
     </div>
 
 
-    <div class= "container" style="text-align: center;">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <div class= "container" >
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal " style="text-align: center;">
             Adicionar Moeda +
         </button>
         
@@ -64,7 +64,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Adicione Moeda a sua carteira</h5>
+                  <h5 class="modal-title" id="exampleModalLabel" >Adicione Moeda a sua carteira</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -74,15 +74,15 @@
                     {% csrf_token %}
                     <div class="form-group">
                       <label for="exampleInputEmail1"  class="col-form-label">Nome da Moeda</label>
-                      <input type="text" class="form-control" name="nome_moeda" id="recipient-name">
+                      <input type="text" placeholder="bitcoin" class="form-control" name="nome_moeda" id="recipient-name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1"  class="col-form-label">Simbolo</label>
-                        <input type="text" class="form-control" name="simbolo_moeda" id="recipient-name">
+                        <input type="text" placeholder="btc" class="form-control" name="simbolo_moeda" id="recipient-name">
                       </div>
                       <div class="form-group">
                         <label for="number_token"  class="col-form-label">Quantidade</label>
-                        <input type="text" class="form-control" name="quantidade_moeda" id="recipient-name">
+                        <input type="number" placeholder="0.0000001" step="0.0000001" class="form-control" name="quantidade_moeda" id="recipient-name">
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

@@ -64,7 +64,4 @@ def carteira(request):
 def apagar(request,id):
     instance=get_object_or_404(Carteira,id=id)
     instance.delete()
-    
-    #Carteira.objects.filter(id=id).delete()
-
     return HttpResponseRedirect(reverse('carteira'))
