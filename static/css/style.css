@@ -97,3 +97,11 @@ a.active, a:hover {
 		left: 0;
 	}
 }
+
+/*mensagens*/
+ul.messages{
+	padding: 0;
+}
+ul.messages{
+	list-style: none;
+}

@@ -9,28 +9,44 @@
     <table class="table table-striped table table-hover" >
         <thead>
             <tr>
-                
+              {%if messages %}
+              <ul class="messages">
+                {% for messages in messages %}
+                  <li{% if messages.tags == 'warning' %} class="alert alert-danger" {% endif %}>{{ messages }}</li>
+                {% endfor %}
+    
+              </ul>
+            {% endif %}    
+                        
                 <th scope="col">Simbolo</th>
                 <th scope="col">Nome</th>                
                 <th scope="col">Preco atual</th>
-                <th scope="col">--</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Remover da carteira</th>
             </tr>
         </thead>
         <tbody>
             {% if dataList %}
-            {% for name, price,imagem, id in dataList %}
+            {% for name, price,imagem, id , quantidade in dataList %}
             <tr>
               <td><img src="{{imagem}}" height="20px" alt="Coin Logo"></td>
                 <td class="align-middle">{{name}}</td>
-                <td class="align-middle">{{price}}BRL</td>                   
+                <td class="align-middle">{{price}} Reais</td>     
+                <td class="align-middle">{{quantidade}}</td>
+
                 <td class="align-middle">
-                  <a href="carteira/apagar/{{id}}"><span><i style="color:red;">X</i></span></a>
+                  <a href="carteira/apagar/{{id}}"><button class="btn btn-danger">Remover</button></a>
                 </td>
                
             </tr>
             {% endfor %}
+            <ul class="messages">
+              
+                <li class="alert alert-success" ><h5>Parabéns! seu patrimonio atual {{ user.get_username }}  é de : {%if saldo > 9999 %}{{saldo|intword}}{%else%}{{saldo|intcomma}}{%endif%} de Reais  </h5></li>
+             
+  
+            </ul>
             
-            <h5>Seu patrimonio atual {{ user.get_username }}  é de : {%if saldo > 9999 %}{{saldo|intword}}{%else%}{{saldo|intcomma}}{%endif%}  </h5>
             {% else %}
             <p>Nothing Here to show</p>
             {% endif %}
@@ -39,7 +55,7 @@
     </div>
 
 
-    <div class= "container">
+    <div class= "container" style="text-align: center;">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Adicionar Moeda +
         </button>
