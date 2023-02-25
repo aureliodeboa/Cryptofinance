@@ -41,8 +41,8 @@
 		<ul>
       {%if request.user.is_authenticated %} 
 			<li><a class="{% block plataforma%}{% endblock %}" href="{% url 'plataforma' %}">Plataforma</a></li>
-			 
-			<li><a class="{% block favoritos%}{% endblock %}" href="#">Favoritos</a></li>
+      <li><a class="{% block mercado%}{% endblock %}" href="{% url 'mercado' %}">Mercado</a></li>
+			<li><a class="{% block favoritos%}{% endblock %}" href="{% url 'favoritos' %}">Favoritos</a></li>
       <li><a class="{% block carteira%}{% endblock %}" href="{% url 'carteira' %}">Carteira</a></li>
 			<li><a href="{% url 'account_logout' %}">Sair</a></li>
       {%else%}
@@ -53,46 +53,7 @@
       {%endif%}
 		</ul>
 	</nav>
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container" style="margin:0px">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-    "symbols": [
-      {
-        "proName": "FOREXCOM:SPXUSD",
-        "title": "S&P 500"
-      },
-      {
-        "proName": "FOREXCOM:NSXUSD",
-        "title": "US 100"
-      },
-      {
-        "proName": "FX_IDC:EURUSD",
-        "title": "EUR/USD"
-      },
-      {
-        "proName": "BITSTAMP:BTCUSD",
-        "title": "Bitcoin"
-      },
-      {
-        "proName": "BITSTAMP:ETHUSD",
-        "title": "Ethereum"
-      },
-      {
-        "description": "Cardano",
-        "proName": "CRYPTOCAP:ADA"
-      }
-    ],
-    "showSymbolLogo": true,
-    "colorTheme": "light",
-    "isTransparent": false,
-    "displayMode": "adaptive",
-    "locale": "pt"
-  }
-    </script>
-  </div>
-  <!-- TradingView Widget END -->
+  
     {% block content %}{% endblock %}
 </body>
 

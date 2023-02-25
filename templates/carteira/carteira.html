@@ -9,26 +9,52 @@
     <table class="table table-striped table table-hover" >
         <thead>
             <tr>
-                
+              {%if messages %}
+              <ul class="messages">
+                {% for messages in messages %}
+                  <li{% if messages.tags == 'warning' %} class="alert alert-danger" {% endif %}>{{ messages }}</li>
+                {% endfor %}
+    
+              </ul>
+            {% endif %}    
+                        
                 <th scope="col">Simbolo</th>
                 <th scope="col">Nome</th>                
                 <th scope="col">Preco atual</th>
-                
+                <th scope="col">Quantidade</th>
+                <th scope="col">Valor de Compra</th>
+                <th scope="col">Valorização</th>
+                <th scope="col">Remover da carteira</th>
             </tr>
         </thead>
         <tbody>
             {% if dataList %}
-            {% for name, price,imagem in dataList %}
+            {% for name, price,imagem, id , quantidade ,valordecompra,valorizacao in dataList %}
             <tr>
               <td><img src="{{imagem}}" height="20px" alt="Coin Logo"></td>
                 <td class="align-middle">{{name}}</td>
-                <td class="align-middle">{{price}}BRL</td>                   
-            
+                <td class="align-middle">{{price}} Reais</td>     
+                <td class="align-middle">{{quantidade}}</td>
+                <td class="align-middle">{{valordecompra}} Reais</td>
+                {%if valorizacao >= 0 %}
+                <td class="align-middle "style="color: green;">+{{valorizacao}} %</td>
+                {%else%}
+                <td class="align-middle "style="color: red;">{{valorizacao}} %</td>
+                {%endif%}
+
+                <td class="align-middle">
+                  <a href="carteira/apagar/{{id}}"><button class="btn btn-danger">Remover</button></a>
+                </td>
                
             </tr>
             {% endfor %}
+            <ul class="messages">
+              
+                <li class="alert alert-success" ><h5>Parabéns! seu patrimonio atual {{ user.get_username }}  é de : {%if saldo > 9999 %}{{saldo|intword}}{%else%}{{saldo|intcomma}}{%endif%} de Reais  </h5></li>
+             
+  
+            </ul>
             
-            <h5>Seu patrimonio atual {{ user.get_username }}  é de : {%if saldo > 9999 %}{{saldo|intword}}{%else%}{{saldo|intcomma}}{%endif%}  </h5>
             {% else %}
             <p>Nothing Here to show</p>
             {% endif %}
@@ -37,8 +63,8 @@
     </div>
 
 
-    <div class= "container">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <div class= "container" >
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal " style="text-align: center;">
             Adicionar Moeda +
         </button>
         
@@ -46,7 +72,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Adicione Moeda a sua carteira</h5>
+                  <h5 class="modal-title" id="exampleModalLabel" >Adicione Moeda a sua carteira</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -56,15 +82,19 @@
                     {% csrf_token %}
                     <div class="form-group">
                       <label for="exampleInputEmail1"  class="col-form-label">Nome da Moeda</label>
-                      <input type="text" class="form-control" name="nome_moeda" id="recipient-name">
+                      <input type="text" placeholder="bitcoin" class="form-control" name="nome_moeda" id="recipient-name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1"  class="col-form-label">Simbolo</label>
-                        <input type="text" class="form-control" name="simbolo_moeda" id="recipient-name">
+                        <input type="text" placeholder="btc" class="form-control" name="simbolo_moeda" id="recipient-name">
                       </div>
                       <div class="form-group">
                         <label for="number_token"  class="col-form-label">Quantidade</label>
-                        <input type="text" class="form-control" name="quantidade_moeda" id="recipient-name">
+                        <input type="number" placeholder="0.0000001" step="0.0000001" class="form-control" name="quantidade_moeda" id="recipient-name">
+                      </div>
+                      <div class="form-group">
+                        <label for="number_token"  class="col-form-label">Valor de Compra</label>
+                        <input type="number" placeholder="0.0000001" step="0.0000001" class="form-control" name="valordecompra" id="recipient-name">
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
