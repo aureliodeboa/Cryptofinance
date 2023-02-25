@@ -61,7 +61,7 @@ def carteira(request):
             quantidade_list.append(obj.quantidade)
             valordecompra_list.append(obj.valordecompra)
             valorizacao=float_quantidade * float(obj.valordecompra)
-            valorizacao= (valorizacao-preco_total)
+            valorizacao= (preco_total - valorizacao)
             valorizacao= round((valorizacao/(float_quantidade * float(obj.valordecompra)))*100,2)
             valorizacao_list.append(valorizacao)
         final_list= zip(nome_moeda_list, preco_moeda_list,imagem_list,id_list,quantidade_list,valordecompra_list,valorizacao_list)
