@@ -14,6 +14,7 @@ def carteira(request):
         nome_moeda= request.POST.get('nome_moeda')
         simbolo_moeda= request.POST.get('simbolo_moeda')
         quantidade_moeda= request.POST.get('quantidade_moeda')
+        valordecompra=request.POST.get('valordecompra')
         if nome_moeda:
             coin_api= f'https://api.coingecko.com/api/v3/coins/{nome_moeda}' #verificar se o nome digitado esta certo
             nome= requests.get(coin_api).json()
@@ -22,9 +23,15 @@ def carteira(request):
                     messages.warning(request,'Nome incorreto, tente novamente!!')
                     return HttpResponseRedirect(reverse('carteira'))
             except:
-                Carteira.objects.create(usuario=request.user,moeda=nome_moeda,symbol=simbolo_moeda, quantidade=quantidade_moeda)
-                print('TUDO SALVO MEU LINDO!!')
-                return HttpResponseRedirect(reverse('carteira'))
+                if valordecompra:
+                    Carteira.objects.create(usuario=request.user,moeda=nome_moeda,symbol=simbolo_moeda, quantidade=quantidade_moeda,valordecompra=valordecompra)
+                    print('TUDO SALVO MEU LINDO!!')
+                    return HttpResponseRedirect(reverse('carteira'))
+                else:
+                    valordecompra=nome['market_data']['current_price']['brl']
+                    Carteira.objects.create(usuario=request.user,moeda=nome_moeda,symbol=simbolo_moeda, quantidade=quantidade_moeda,valordecompra=valordecompra)
+                    print('TUDO SALVO MEU LINDO!!')
+                    return HttpResponseRedirect(reverse('carteira'))
                 
           
     else:
@@ -35,6 +42,8 @@ def carteira(request):
         imagem_list=[]
         id_list=[]
         quantidade_list=[]
+        valordecompra_list=[]
+        valorizacao_list=[]
         saldototal=float(0)
         for obj in carteira_objs:
             coin_api= f'https://api.coingecko.com/api/v3/coins/{obj.moeda}' #o nome que ta escrito no models
@@ -50,7 +59,12 @@ def carteira(request):
             saldototal+=float(preco_total)
             id_list.append(obj.id)
             quantidade_list.append(obj.quantidade)
-        final_list= zip(nome_moeda_list, preco_moeda_list,imagem_list,id_list,quantidade_list)
+            valordecompra_list.append(obj.valordecompra)
+            valorizacao=float_quantidade * float(obj.valordecompra)
+            valorizacao= (valorizacao-preco_total)
+            valorizacao= round((valorizacao/(float_quantidade * float(obj.valordecompra)))*100,2)
+            valorizacao_list.append(valorizacao)
+        final_list= zip(nome_moeda_list, preco_moeda_list,imagem_list,id_list,quantidade_list,valordecompra_list,valorizacao_list)
         data={
             'dataList':final_list,
             'saldo':saldototal,
