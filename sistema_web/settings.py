@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-9h*my8us%g&j3w*fk54t4rqzv-q8*gf7(e!cn$3d!f&-xe7lao
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [cryptofinance-production-9966.up.railway.app]
+ALLOWED_HOSTS = ['cryptofinance-production-9966.up.railway.app']
 
 
 # Application definition
