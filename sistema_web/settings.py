@@ -16,6 +16,7 @@ SECRET_KEY = 'django-insecure-9h*my8us%g&j3w*fk54t4rqzv-q8*gf7(e!cn$3d!f&-xe7lao
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://*.cryptofinance-production-9966.up.railway.app']
 
 
 # Application definition
