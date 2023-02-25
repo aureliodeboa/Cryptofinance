@@ -22,17 +22,25 @@
                 <th scope="col">Nome</th>                
                 <th scope="col">Preco atual</th>
                 <th scope="col">Quantidade</th>
+                <th scope="col">Valor de Compra</th>
+                <th scope="col">Valorização</th>
                 <th scope="col">Remover da carteira</th>
             </tr>
         </thead>
         <tbody>
             {% if dataList %}
-            {% for name, price,imagem, id , quantidade in dataList %}
+            {% for name, price,imagem, id , quantidade ,valordecompra,valorizacao in dataList %}
             <tr>
               <td><img src="{{imagem}}" height="20px" alt="Coin Logo"></td>
                 <td class="align-middle">{{name}}</td>
                 <td class="align-middle">{{price}} Reais</td>     
                 <td class="align-middle">{{quantidade}}</td>
+                <td class="align-middle">{{valordecompra}} Reais</td>
+                {%if valorizacao >= 0%}
+                <td class="align-middle "style="color: green;">+{{valorizacao}} %</td>
+                {%else%}
+                <td class="align-middle "style="color: red;">{{valorizacao}} %</td>
+                {%endif%}
 
                 <td class="align-middle">
                   <a href="carteira/apagar/{{id}}"><button class="btn btn-danger">Remover</button></a>
@@ -83,6 +91,10 @@
                       <div class="form-group">
                         <label for="number_token"  class="col-form-label">Quantidade</label>
                         <input type="number" placeholder="0.0000001" step="0.0000001" class="form-control" name="quantidade_moeda" id="recipient-name">
+                      </div>
+                      <div class="form-group">
+                        <label for="number_token"  class="col-form-label">Valor de Compra</label>
+                        <input type="number" placeholder="0.0000001" step="0.0000001" class="form-control" name="valordecompra" id="recipient-name">
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
